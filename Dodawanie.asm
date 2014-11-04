@@ -21,7 +21,7 @@ tab2: .BYTE LEN
 //LDI R19, liczbaB
 LDI R20, 15 ; licznik
 
-//LDI XL, Low(tab1) ;XL to R26, LOW - mniej znacz¹cy bit
+//LDI XL, Low(tab1) ;XL to R26, LOW - mniej znaczacy bit
 //LDI XH, High(tab1)
 
 
