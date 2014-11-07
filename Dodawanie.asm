@@ -7,36 +7,41 @@
 
 
  #include "m32def.inc"
-.EQU LEN = 16
-.DSEG // segment danych
+.EQU LEN = 16 //dlugosc tablicy
+.DSEG 
 .ORG 100
-tab1: .BYTE LEN ; 2 tablice 16 bajtowe
+tab1: .BYTE LEN 
 tab2: .BYTE LEN
-//liczbaA: .dw 0x74 
-//liczbaB: .dw 0x84
 
-.CSEG //segment instrukcji
+
+.CSEG 
 .ORG 0
-//LDI R18, liczbaA ; 
-//LDI R19, liczbaB
-LDI R20, 15 ; licznik
 
-//LDI XL, Low(tab1) ;XL to R26, LOW - mniej znaczacy bit
-//LDI XH, High(tab1)
+LDI XL, low(tab1)
+LDI XH, high(tab1)
+LDI YL, low(tab2)
+LDI YH, high(tab2)
+LDI ZL, low(LEN)
+LDI ZH, high(LEN)
+
+/*
+X - adres pierwszej tablicy
+Y - adres drugiej tablicy
+Z - dlugosc tablic
+*/
 
 
 
+CLC
 START:
-	LD R16, X  ;wycztujemy liczbe z tablicy1 o konkretnym indeksie
-	LD R17, Y 
+	LD R18, X+
+    	LD R19, Y
+	ADC R18, R19 
 
-	ADC R16, R17
-	ST X, R16 ;zapisujemy wynik dodawania w tablicy2
-	
-	//DEC R18 
-	//DEC R19
+	ST Y+, R18 //zapisujemy wynik dodawania w 2 tablicy
 
-	DEC R20
+	SBIW Z, 1 // skok jezeli Z!=1
+	BRNE START
 
-CPI R20, 0 ; sprawdza czy licznik =0 jesli nie to wykonuje skok
-BRNE START
+KONIEC:
+RJMP KONIEC
