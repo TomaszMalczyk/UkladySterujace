@@ -35,13 +35,18 @@ Z - dlugosc tablic
 CLC
 START:
 	LD R18, X+
-    	LD R19, Y
+    LD R19, Y
 	ADC R18, R19 
-
+	IN R20, SREG
 	ST Y+, R18 //zapisujemy wynik dodawania w 2 tablicy
 
 	SBIW Z, 1 // skok jezeli Z!=1
+	IN R21, SREG
+	OR R20, R21
+    OUT SREG, R20
 	BRNE START
 
 KONIEC:
 RJMP KONIEC
+		
+         
