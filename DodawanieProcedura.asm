@@ -42,27 +42,27 @@ KONIEC:
 
 
 DODAJ:
-    PUSH R18
-    PUSH R19
+    	PUSH R18
+    	PUSH R19
 	PUSH R20
 	PUSH R21
-    CLC
-    LOOP:
+    	CLC
+    	LOOP:
     
         LD R18, X+
         LD R19, Y   // inkrementacja Y jest w ST bo chcemy storowac w dobre miejce a nie w 1 dalej
         ADC R18, R19
         IN R20, SREG //odkladam wszyskie flagi do r20
-		//CLC
-		ST Y+, R18
+	//CLC
+	ST Y+, R18
         SBIW Z, 1 // skok jezeli Z!=1
-		IN R21, SREG
-		OR R20, R21
+	IN R21, SREG
+	OR R20, R21
         OUT SREG, R20
-		BRNE LOOP 
+	BRNE LOOP 
 	
 	POP R21
-    POP R20
+	POP R20
 	POP R19
-    POP R18
-    RET
+    	POP R18
+    	RET
